@@ -10,6 +10,11 @@ class Message extends \Core\Module
 	public function __construct()
 	{
 		parent::__construct();
+		$options = $this->getModuleValue('options');
+		if (is_array($options))
+		{
+			$this->options = $options;
+		}
 	}
 
 	public function send(string $handler_type_or_class, string $subject, string $content, array $recipients)

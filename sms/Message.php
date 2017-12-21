@@ -40,7 +40,7 @@ class Message extends \Messaging\MessageHandler
 			return false;
 		}
 		$data = array(
-			'message'    => (empty($subject) ? '' : $subject . "\n\n") . $content,
+			'message'    => (empty($subject) ? '' : $subject . "\n") . $content,
 			'recipients' => array(),
 		);
 		if ($this->getOption('sender'))
@@ -62,7 +62,6 @@ class Message extends \Messaging\MessageHandler
 		$url  = 'https://gatewayapi.com/rest/mtsms' . ($token ? '?token=' . $token : '');
 		$data = $this->post($url, json_encode($data), $username, $password, $headers);
 		$data = @json_decode($data, true);
-		var_dump($data);
 
 		return $data === false ? false : true;
 	}
@@ -80,10 +79,6 @@ class Message extends \Messaging\MessageHandler
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-		var_dump($url);
-		var_dump($data);
-		// return false;
 
 		$data = curl_exec($ch);
 		if (curl_error($ch))
