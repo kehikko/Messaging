@@ -23,7 +23,7 @@ class Message extends \Core\Module
             kernel::log(LOG_NOTICE, 'no recipients for sending message, handler: ' . $handler_type_or_class . ', subject: ' . $subject);
             return false;
         }
-        $hander = $this->getHandlerClass($handler_type_or_class);
+        $handler = $this->getHandlerClass($handler_type_or_class);
         if (!$handler->send($subject, $content, $recipients)) {
             kernel::log(LOG_ERR, 'failed to send message, handler: ' . $handler_type_or_class . ', subject: ' . $subject);
             return false;
